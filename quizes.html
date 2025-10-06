@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz App</title>
+    <link rel="stylesheet" href="quiz.css" />
+    <script src="quiz.js" defer></script>
+  </head>
+  <body>
+    <div class="quiz-container">
+      <header class="header">
+        <img class="quiz-time" src="./images/Quiz-time.svg" alt="quiz-time" />
+        <div class="right-section">
+          <div class="speaker-imgs">
+            <img src="./images/speaker.svg" alt="speaker" class="speaker" />
+            <img src="./images/mute.svg" alt="mute" class="mute" />
+          </div>
+          <div class="question-no">
+            <span class="quiz-no">02</span>
+            /
+            <span class="no-of-questions">25</span>
+          </div>
+        </div>
+      </header>
+      <h1 class="question">
+        Inside which HTML element do we put the JavaScript?
+      </h1>
+      <div class="timer">00:30</div>
+      <div class="options">
+        <div class="option option-1 wrong">
+          <p class="option-text">js</p>
+          <div class="msg">
+            <span class="wrong-text">You choose</span
+            ><span
+              ><img
+                class="correct-img"
+                src="./images/correct.svg"
+                alt="correct" />
+              <img class="wrong-img" src="./images/wrong.svg" alt="wrong"
+            /></span>
+          </div>
+        </div>
+        <div class="option option-2">
+          <p class="option-text">scripting</p>
+          <div class="msg">
+            <span class="wrong-text">You choose</span
+            ><span
+              ><img
+                class="correct-img"
+                src="./images/correct.svg"
+                alt="correct" />
+              <img class="wrong-img" src="./images/wrong.svg" alt="wrong"
+            /></span>
+          </div>
+        </div>
+        <div class="option option-3">
+          <p class="option-text">javascript</p>
+          <div class="msg">
+            <span class="wrong-text">You choose</span
+            ><span
+              ><img
+                class="correct-img"
+                src="./images/correct.svg"
+                alt="correct" />
+              <img class="wrong-img" src="./images/wrong.svg" alt="wrong"
+            /></span>
+          </div>
+        </div>
+
+        <div class="option option-3 correct">
+          <p class="option-text">script</p>
+          <div class="msg">
+            <span class="wrong-text">You choose</span
+            ><span
+              ><img
+                class="correct-img"
+                src="./images/correct.svg"
+                alt="correct" />
+              <img class="wrong-img" src="./images/wrong.svg" alt="wrong"
+            /></span>
+          </div>
+        </div>
+      </div>
+      <div class="next-quiz">
+        <a href="result.html"
+          ><button type="button" class="next">Next ></button></a
+        >
+      </div>
+    </div>
+  </body>
+</html>
