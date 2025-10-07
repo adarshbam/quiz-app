@@ -3,7 +3,7 @@
 }
 
 :root {
-  --result-percentage: 70%;
+  --result-percentage: 0%;
 }
 
 body {
@@ -99,8 +99,8 @@ body {
   justify-content: center;
   align-items: center;
   position: relative;
-  transform: rotate(120deg);
   margin-bottom: 1.25rem;
+  transition: all 0.5s ease-in-out;
 }
 
 /* white circle in center */
@@ -117,13 +117,12 @@ body {
   position: absolute;
   font-weight: bold;
   font-size: 1.125rem;
-  transform: rotate(-120deg);
 }
 
 .label.green {
   color: #2ecc40;
-  bottom: 1.25rem;
-  right: -3.125rem;
+  top: 70%;
+  right: -50px;
 }
 
 .label.green::before {
@@ -132,8 +131,8 @@ body {
   height: 1rem;
   border-radius: 50%;
   position: absolute;
-  bottom: 4.9375rem;
-  left: 4.375rem;
+  bottom: 5rem;
+  right: 4.5rem;
   background-color: #009006;
 }
 
@@ -142,16 +141,16 @@ body {
   width: 3.75rem;
   height: 3.75rem;
   border-top: 0.25rem solid #009006;
-  border-left: 0.25rem solid #009006;
+  border-right: 0.25rem solid #009006;
   position: absolute;
-  left: 50%;
+  right: 50%;
   bottom: 100%;
 }
 
 .label.red {
   color: #ff6b6b;
-  top: -2.5rem;
-  left: 4.0625rem;
+  top: 70%;
+  left: -50px;
 }
 
 .label.red::before {
@@ -160,8 +159,8 @@ body {
   height: 1rem;
   border-radius: 50%;
   position: absolute;
-  bottom: 5.125rem;
-  right: 4.375rem;
+  bottom: 5.2rem;
+  left: 4.8rem;
   background-color: #eb4545;
 }
 
@@ -170,10 +169,10 @@ body {
   width: 3.75rem;
   height: 3.75rem;
   border-top: 0.25rem solid #eb4545;
-  border-left: 0.25rem solid #eb4545;
+  border-right: 0.25rem solid #eb4545;
   position: absolute;
   bottom: 1.875rem;
-  right: 1.25rem;
+  right: -2.75rem;
   transform: rotateY(180deg);
 }
 
@@ -183,7 +182,6 @@ body {
   font-weight: bold;
   font-size: 1.5rem;
   color: #000;
-  transform: rotate(-120deg);
 }
 
 @media (width <= 680px) {
