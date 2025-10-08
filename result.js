@@ -8,6 +8,10 @@ const reset = document.querySelector(".retry");
 
 const quizData = JSON.parse(localStorage.getItem("quiz-data"));
 
+const aceVideo = document.querySelector(".ace-video");
+const aceAudio1 = document.querySelector(".ace-audio-1");
+const aceAudio2 = document.querySelector(".ace-audio-2");
+
 const correctAnswers = quizData["correct-answers"] || 0;
 const noOfQuestions = quizData["no-of-questions"] || 20;
 
@@ -44,6 +48,27 @@ for (let key in scoreMsgs) {
     finalMsgDOM.textContent = scoreMsgs[key];
     break;
   }
+}
+
+if (correctPercentage > 90) {
+  aceVideo.classList.remove("hidden");
+  aceVideo.play();
+
+  document.body.style.color = "white";
+  document.body.style.textShadow = "0 4px 4px rgba(0,0,0.1)";
+
+  document.body.padding = "0";
+  aceAudio1.play();
+  setTimeout(() => {
+    aceAudio2.play();
+  }, 4000);
+
+  setInterval(() => {
+    aceAudio1.play();
+    setTimeout(() => {
+      aceAudio2.play();
+    }, 4000);
+  }, 6000);
 }
 
 document.documentElement.style.setProperty(

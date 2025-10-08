@@ -6,8 +6,10 @@ const timerDOM = document.querySelector(".timer");
 const nextDOM = document.querySelector(".next");
 
 const tickingAudio = document.querySelector(".ticking");
-const correctAudio = document.querySelector(".correct");
-const wrongAudio = document.querySelector(".wrong");
+const correctAudio = document.querySelector(".correct-audio");
+const wrongAudio = document.querySelector(".wrong-audio");
+
+const bgAudio = document.querySelector(".bg-audio");
 
 const audioControlsBtn = document.querySelector(".speaker-imgs");
 
@@ -310,6 +312,7 @@ function nextQuestion() {
 }
 
 function playSound(sound) {
+  console.log(sound, quizData.muted);
   if (!quizData.muted) {
     sound.play();
 
@@ -320,6 +323,8 @@ function playSound(sound) {
     }, 1500);
   }
 }
+
+bgAudio.play();
 
 questionDOM.innerHTML = question.question;
 quizNoDOM.textContent = quizData["quiz-no"];
@@ -346,6 +351,8 @@ question.options.forEach((option) => {
 audioControlsBtn.addEventListener("click", () => {
   audioControlsBtn.classList.toggle("muted");
   quizData.muted = !quizData.muted;
+  if (quizData.muted) bgAudio.pause();
+  else bgAudio.play();
   console.log(quizData.muted);
 });
 
@@ -362,7 +369,6 @@ let lowTimerPlayed = false;
 const countDown = setInterval(() => {
   if (timer == 1) {
     nextQuestion();
-    playSound(wrongAudio);
   }
 
   if (
@@ -388,31 +394,32 @@ const countDown = setInterval(() => {
 
 let firstTime = true;
 optionsDOM.addEventListener("click", (e) => {
-  if (e.target.closest(".option") && firstTime) {
-    const option = e.target;
+  const option = e.target.closest(".option");
 
-    if (option.classList.contains("correct-option")) {
-      option.classList.add("correct");
-      quizData["correct-answers"]++;
-      localStorage.setItem("quiz-data", JSON.stringify(quizData));
+  // If the click wasn't inside an .option or already answered, stop
+  if (!option || !firstTime) return;
 
-      playSound(correctAudio);
+  if (option.classList.contains("correct-option")) {
+    option.classList.add("correct");
+    quizData["correct-answers"]++;
+    localStorage.setItem("quiz-data", JSON.stringify(quizData));
 
-      console.log(quizData);
-    } else {
-      console.log([...optionsDOM.children]);
-      let correctElement = [...optionsDOM.children].filter((option) =>
-        option.classList.contains("correct-option")
-      )[0];
+    playSound(correctAudio);
 
-      correctElement.classList.add("correct");
-      option.classList.add("wrong");
+    console.log(quizData);
+  } else {
+    console.log([...optionsDOM.children]);
+    let correctElement = [...optionsDOM.children].filter((option) =>
+      option.classList.contains("correct-option")
+    )[0];
 
-      playSound(wrongAudio);
-    }
-    firstTime = false;
-    clearInterval(countDown);
+    correctElement.classList.add("correct");
+    option.classList.add("wrong");
+
+    playSound(wrongAudio);
   }
+  firstTime = false;
+  clearInterval(countDown);
 });
 
 nextDOM.addEventListener("click", nextQuestion);

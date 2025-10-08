@@ -16,8 +16,9 @@ body {
   justify-content: center;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #f6f4f0;
+  background-color: #fff;
   padding: 1.25rem;
+  color: #000;
 }
 
 .quiz-time {
@@ -68,7 +69,7 @@ body {
 
 .share-text {
   font-size: 1.5rem;
-  color: #535353;
+  color: #fff;
   margin-bottom: 0.5rem;
 }
 
@@ -182,6 +183,7 @@ body {
   font-weight: bold;
   font-size: 1.5rem;
   color: #000;
+  text-shadow: none;
 }
 
 @media (width <= 680px) {
@@ -213,6 +215,17 @@ body {
   .share-options img {
     width: 1.875rem;
   }
+}
+
+.ace-video {
+  position: fixed;
+  background-size: cover;
+  z-index: -1;
+  opacity: 5;
+}
+
+.hidden {
+  display: none;
 }
 
 @media (width <= 380px) {
