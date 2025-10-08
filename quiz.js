@@ -5,6 +5,10 @@ const optionsDOM = document.querySelector(".options");
 const timerDOM = document.querySelector(".timer");
 const nextDOM = document.querySelector(".next");
 
+const tickingAudio = document.querySelector(".ticking");
+const correctAudio = document.querySelector(".correct");
+const wrongAudio = document.querySelector(".wrong");
+
 const audioControlsBtn = document.querySelector(".speaker-imgs");
 
 // All 25 questions (randomized order)
@@ -305,6 +309,18 @@ function nextQuestion() {
   localStorage.setItem("quiz-data", JSON.stringify(quizData));
 }
 
+function playSound(sound) {
+  if (!quizData.muted) {
+    sound.play();
+
+    setTimeout(() => {
+      sound.pause();
+      sound.currentTime = 0;
+      console.log("pause");
+    }, 1500);
+  }
+}
+
 questionDOM.innerHTML = question.question;
 quizNoDOM.textContent = quizData["quiz-no"];
 noOfQuestionsDOM.textContent = questions.length;
@@ -340,8 +356,28 @@ timerDOM.textContent = `${String(Math.floor(timer / 60)).padStart(
   "0"
 )}:${String(timer % 60).padStart(2, "0")}`;
 
+let halfTimerPlayer = false;
+let lowTimerPlayed = false;
+
 const countDown = setInterval(() => {
-  if (timer == 1) nextQuestion();
+  if (timer == 1) {
+    nextQuestion();
+    playSound(wrongAudio);
+  }
+
+  if (
+    !halfTimerPlayer &&
+    timer < Math.floor(question.durationToAnswer / 2) + 1
+  ) {
+    playSound(tickingAudio);
+    document.documentElement.style.setProperty("--accent-color", "197, 190, 0");
+    halfTimerPlayer = true;
+  }
+  if (!lowTimerPlayed && timer < 11) {
+    playSound(tickingAudio);
+    document.documentElement.style.setProperty("--accent-color", "197, 12, 0");
+    lowTimerPlayed = true;
+  }
 
   timer--;
   let mins = String(Math.floor(timer / 60)).padStart(2, "0");
@@ -360,6 +396,8 @@ optionsDOM.addEventListener("click", (e) => {
       quizData["correct-answers"]++;
       localStorage.setItem("quiz-data", JSON.stringify(quizData));
 
+      playSound(correctAudio);
+
       console.log(quizData);
     } else {
       console.log([...optionsDOM.children]);
@@ -369,6 +407,8 @@ optionsDOM.addEventListener("click", (e) => {
 
       correctElement.classList.add("correct");
       option.classList.add("wrong");
+
+      playSound(wrongAudio);
     }
     firstTime = false;
     clearInterval(countDown);

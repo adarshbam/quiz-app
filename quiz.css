@@ -22,7 +22,7 @@ body {
   flex-direction: column;
   min-height: 100vh;
   background-color: rgba(var(--accent-color), 0.2);
-  transition: background-color 0.3s ease-in-out;
+  transition: background-color 0.1s ease-in-out;
   padding: 1.25rem;
 }
 
@@ -139,7 +139,7 @@ body {
   min-height: 36px;
   text-align: center;
   margin-left: auto;
-  transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  transition: background-color 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
 }
 
 .options .correct-img,
@@ -179,7 +179,7 @@ body {
   background-color: transparent;
   border: none;
   cursor: pointer;
-  transition: color 0.3s ease-in-out;
+  transition: color 0.1s ease-in-out;
   text-decoration: none;
 }
 
