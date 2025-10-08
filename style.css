@@ -14,6 +14,7 @@ body {
   font-family: "Poppins", sans-serif;
   font-weight: 600;
   padding: 20px;
+  background-color: #4e6fc5;
 }
 
 .quiz-time-img {
@@ -52,6 +53,7 @@ body {
   color: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0.3);
   padding: 80px;
+  background-color: rgb(78, 111, 197, 0.2);
   border-radius: 8px;
 }
 
