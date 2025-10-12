@@ -27,6 +27,17 @@ let questions = [
     ],
   },
   {
+    question: "Javascript is created by?",
+    durationToAnswer: 30,
+    marks: 5,
+    options: [
+      { correct: true, option: "Brendan Eich" },
+      { correct: false, option: "Ryan Daul" },
+      { correct: false, option: "Elon Musk" },
+      { correct: true, option: "Bill Gates" },
+    ],
+  },
+  {
     question: "Inside which HTML element do we put the JavaScript?",
     durationToAnswer: 30,
     marks: 5,
@@ -297,16 +308,19 @@ let quizData = JSON.parse(localStorage.getItem("quiz-data")) || {
   "correct-answers": 0,
   "no-of-questions": questions.length,
   "highest-score": localStorage.getItem("highest-score") || 0,
+  "bg-music-time": 0,
 };
 
 let question = questions[quizData["quiz-no"] - 1];
 
 function nextQuestion() {
+  quizData["bg-music-time"] = Math.floor(bgAudio.currentTime);
   if (quizData["quiz-no"] < questions.length) {
     quizData["quiz-no"]++;
     window.location.reload();
   } else {
     nextDOM.href = "result.html";
+    nextDOM.click();
   }
   localStorage.setItem("quiz-data", JSON.stringify(quizData));
 }
@@ -324,7 +338,12 @@ function playSound(sound) {
   }
 }
 
-bgAudio.play();
+bgAudio.currentTime = quizData["bg-music-time"] || 0;
+
+if (!quizData.muted) bgAudio.play();
+else {
+  audioControlsBtn.classList.add("muted");
+}
 
 questionDOM.innerHTML = question.question;
 quizNoDOM.textContent = quizData["quiz-no"];

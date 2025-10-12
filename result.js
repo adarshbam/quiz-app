@@ -1,8 +1,9 @@
 const correctAnswersDOM = document.querySelector(".correct-answers");
 const noOfQuestionsDOM = document.querySelector(".no-of-questions");
-const correctLabelDOM = document.querySelector(".green");
-const wrongLabelDOM = document.querySelector(".red");
+const correctLabelDOM = document.querySelector(".correct-per");
+const wrongLabelDOM = document.querySelector(".wrong-per");
 const finalMsgDOM = document.querySelector(".result-msg");
+const pieChart = document.querySelector(".pie-chart");
 
 const reset = document.querySelector(".retry");
 
@@ -41,6 +42,10 @@ console.log(correctPercentage);
 correctLabelDOM.textContent = `${correctPercentage}%`;
 wrongLabelDOM.textContent = `${100 - correctPercentage}%`;
 
+pieChart.title = `Correct: ${correctPercentage}% | Incorrect: ${
+  100 - correctPercentage
+}%`;
+
 // Loop through the scoreMsgs keys to find the right message
 for (let key in scoreMsgs) {
   if (correctPercentage <= key) {
@@ -71,10 +76,29 @@ if (correctPercentage > 90) {
   }, 6000);
 }
 
-document.documentElement.style.setProperty(
-  "--result-percentage",
-  `${correctPercentage}%`
-);
+let correctCount = 0;
+const correctTimer = setInterval(() => {
+  console.log(correctPercentage);
+  if (correctCount > correctPercentage - 2) clearInterval(correctTimer);
+  correctCount++;
+
+  document.documentElement.style.setProperty(
+    "--correct",
+    `${correctCount - 0.5}%`
+  );
+}, 20);
+
+let incorrectCount = 0;
+const incorrectTimer = setInterval(() => {
+  console.log(100 - correctPercentage);
+  if (incorrectCount > 98 - correctPercentage) clearInterval(incorrectTimer);
+  incorrectCount++;
+
+  document.documentElement.style.setProperty(
+    "--incorrect",
+    `${incorrectCount}%`
+  );
+}, 10);
 
 reset.addEventListener("click", () => {
   quizData["quiz-no"] = 1;

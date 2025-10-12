@@ -4,76 +4,75 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: 0.5rem;
+}
+
 body {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  gap: 20px;
+  gap: 1.25rem;
   font-family: "Poppins", sans-serif;
   font-weight: 600;
-  padding: 20px;
+  padding: 1.25rem;
   background-color: #4e6fc5;
 }
 
 .quiz-time-img {
-  width: min(800px, 100%);
+  width: min(50rem, 100%);
 }
 
 .start-now {
   background-color: #35bd3a;
-  width: min(400px, min-content);
-  padding: 30px 60px;
-  font-size: 48px;
-  border-radius: 8px;
-  box-shadow: 10px 8px 0 #01ab0855;
+  width: min(25rem, min-content);
+  padding: 1.875rem 3.75rem;
+  font-size: 3rem;
+  border-radius: 0.5rem;
+  box-shadow: 0.625rem 0.5rem 0 #01ab0855;
   color: #fff;
   text-decoration: none;
   display: flex;
-  gap: 4px;
+  gap: 0.25rem;
   outline: none;
-  margin-bottom: 160px;
+  margin-bottom: 10rem;
 }
 
 .start-now span {
-  transform: translateX(0px);
+  transform: translateX(0rem);
   transition: all 0.3s ease-in-out;
-  margin-top: 2px;
-  letter-spacing: -10px;
-}
-
-.start-now:hover span {
-  transform: translateX(10px);
-  letter-spacing: -5px;
+  margin-top: 0.125rem;
+  letter-spacing: -0.625rem;
 }
 
 .highest-score-text {
-  font-size: 24px;
+  font-size: 1.5rem;
   color: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0.3);
-  padding: 80px;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0.3);
+  padding: 5rem;
   background-color: rgb(78, 111, 197, 0.2);
-  border-radius: 8px;
+  border-radius: 0.5rem;
 }
 
-@media (width <= 680px) {
+@media (width <= 42.5rem) {
   .start-now {
-    font-size: 20px;
-    padding: 12px 20px;
-    box-shadow: 4px 4px 0 #01ab0855;
+    font-size: 1.25rem;
+    padding: 0.75rem 1.25rem;
+    box-shadow: 0.25rem 0.25rem 0 #01ab0855;
   }
 
   .start-now span {
-    transform: translateX(0px);
+    transform: translateX(0rem);
     transition: all 0.3s ease-in-out;
-    margin-top: 2px;
-    letter-spacing: -5px;
+    margin-top: 0.125rem;
+    letter-spacing: -0.5rem;
   }
 
   .highest-score-text {
-    font-size: 16px;
-    padding: 20px;
+    font-size: 1rem;
+    padding: 1.25rem;
   }
 }
 

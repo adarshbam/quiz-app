@@ -13,15 +13,19 @@
 
     <div class="result">
       <div class="score">
-        <div class="pie-chart">
+        <div class="pie-chart" title="Correct / Incorrect">
           <div class="center">
             <span class="correct-answers">22</span>/<span
               class="no-of-questions"
               >25</span
             >
           </div>
-          <span class="label green">70%</span>
-          <span class="label red">30%</span>
+          <p class="label correct" title="Correct Answers">
+            <span class="green"></span><span class="correct-per">70%</span>
+          </p>
+          <p class="label wrong" title="Incorrect Answers">
+            <span class="red"></span><span class="wrong-per">30%</span>
+          </p>
         </div>
       </div>
       <div class="correct-answers-bar"></div>
@@ -37,7 +41,7 @@
       <img src="./images/instagram.svg" alt="instagram" />
     </div>
 
-    <video src="videos/slash.mp4" class="ace-video hidden" loop></video>
+    <video src="videos/slash.webm" class="ace-video hidden" loop></video>
     <audio src="sounds/sword-1.mp3" class="ace-audio-1"></audio>
     <audio src="sounds/sword-2.mp3" class="ace-audio-2"></audio>
   </body>
