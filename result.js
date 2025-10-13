@@ -1,3 +1,5 @@
+import questions from "./questions.js";
+
 const correctAnswersDOM = document.querySelector(".correct-answers");
 const noOfQuestionsDOM = document.querySelector(".no-of-questions");
 const correctLabelDOM = document.querySelector(".correct-per");
@@ -14,7 +16,7 @@ const aceAudio1 = document.querySelector(".ace-audio-1");
 const aceAudio2 = document.querySelector(".ace-audio-2");
 
 const correctAnswers = quizData["correct-answers"] || 0;
-const noOfQuestions = quizData["no-of-questions"] || 20;
+const noOfQuestions = questions.length;
 
 const highestScore = quizData["highest-score"] || 0;
 

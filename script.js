@@ -1,3 +1,5 @@
+import questions from "./questions.js";
+
 const highestScoreDOM = document.querySelector(".highest-score");
 const noOfQuestionsDOM = document.querySelector(".no-of-questions");
 
@@ -10,11 +12,12 @@ console.log(quizData);
 if (quizData) {
   console.log(quizData, highestScoreDOM, noOfQuestionsDOM);
   highestScoreDOM.textContent = quizData["highest-score"];
-  noOfQuestionsDOM.textContent = quizData["no-of-questions"];
 } else {
   highestScoreDOM.textContent = 0;
-  noOfQuestionsDOM.textContent = 25;
 }
+
+console.log(questions);
+noOfQuestionsDOM.textContent = questions.length;
 
 bgAudio.play();
 bgVideo.play();
