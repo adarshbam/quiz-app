@@ -192,8 +192,7 @@ export default [
     ],
   },
   {
-    question:
-      "Tricky: what does this produce?<br><br>console.log(typeof null);",
+    question: "What does this produce?<br><br>console.log(typeof null);",
     durationToAnswer: 45,
     marks: 6,
     options: [

@@ -108,3 +108,9 @@ reset.addEventListener("click", () => {
 
   localStorage.setItem("quiz-data", JSON.stringify(quizData));
 });
+
+export {
+  correctAnswers as score,
+  noOfQuestions as total,
+  correctPercentage as percent,
+};

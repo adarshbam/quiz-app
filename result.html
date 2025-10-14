@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quiz App</title>
     <link rel="stylesheet" href="result.css" />
-    <script src="result.js" type="module" defer></script>
+    <link rel="stylesheet" href="share.css" />
+    <script src="result.js" type="module"></script>
+    <script src="share.js" type="module"></script>
   </head>
   <body>
     <img class="quiz-time" src="images/Quiz-time.svg" alt="quiz-time" />
@@ -36,10 +38,13 @@
 
     <div class="share-options">
       <p class="share-text">Share your score:</p>
-      <img src="./images/linkedin.svg" alt="linkedIn" />
-      <img src="./images/twitter.svg" alt="twitter" />
-      <img src="./images/instagram.svg" alt="instagram" />
+      <img id="share-linkedin" src="./images/linkedin.svg" alt="linkedIn" />
+      <img id="share-twitter" src="./images/twitter.svg" alt="twitter" />
+      <img id="share-instagram" src="./images/instagram.svg" alt="instagram" />
     </div>
+
+    <!-- a button to download the image manually (hidden normally) -->
+    <button id="download-image" style="display: none">Download image</button>
 
     <video src="videos/slash.webm" class="ace-video hidden" loop></video>
     <audio src="sounds/sword-1.mp3" class="ace-audio-1"></audio>

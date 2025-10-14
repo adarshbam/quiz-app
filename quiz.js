@@ -26,14 +26,57 @@ let quizData = JSON.parse(localStorage.getItem("quiz-data")) || {
 
 let question = questions[quizData["quiz-no"] - 1];
 
+function generateOptions() {
+  optionsDOM.innerHTML = ``;
+
+  question.options
+    .sort(() => Math.random() - 0.5)
+    .forEach((option) => {
+      let optionElement = document.createElement("div");
+      optionElement.classList.add("option");
+      if (option.correct) optionElement.classList.add("correct-option");
+      optionElement.innerHTML = `<p class="option-text">${option.option}</p>
+      <div class="msg">
+        <span class="wrong-text">You choose</span
+        ><span
+          ><img
+            class="correct-img"
+            src="./images/correct.svg"
+            alt="correct" />
+          <img class="wrong-img" src="./images/wrong.svg" alt="wrong"
+        /></span>
+      </div>`;
+      optionsDOM.append(optionElement);
+    });
+}
+
+let pauseTimer = false;
+
 function nextQuestion() {
   quizData["bg-music-time"] = Math.floor(bgAudio.currentTime);
-  if (quizData["quiz-no"] < questions.length) {
-    quizData["quiz-no"]++;
-    window.location.reload();
-  } else {
+
+  if (quizData["quiz-no"] == questions.length) {
     nextDOM.href = "result.html";
     nextDOM.click();
+  }
+
+  if (quizData["quiz-no"] <= questions.length) {
+    quizData["quiz-no"]++;
+    question = questions[quizData["quiz-no"] - 1];
+
+    console.log(question, quizData["quiz-no"]);
+    quizNoDOM.textContent = quizData["quiz-no"];
+
+    timer = question.durationToAnswer;
+    pauseTimer = false;
+
+    let mins = String(Math.floor(timer / 60)).padStart(2, "0");
+    let secs = String(timer % 60).padStart(2, "0");
+
+    timerDOM.textContent = `${mins}:${secs}`;
+
+    questionDOM.innerHTML = question.question;
+    generateOptions();
   }
   localStorage.setItem("quiz-data", JSON.stringify(quizData));
 }
@@ -62,24 +105,6 @@ questionDOM.innerHTML = question.question;
 quizNoDOM.textContent = quizData["quiz-no"];
 noOfQuestionsDOM.textContent = questions.length;
 
-question.options.forEach((option) => {
-  let optionElement = document.createElement("div");
-  optionElement.classList.add("option");
-  if (option.correct) optionElement.classList.add("correct-option");
-  optionElement.innerHTML = `<p class="option-text">${option.option}</p>
-    <div class="msg">
-      <span class="wrong-text">You choose</span
-      ><span
-        ><img
-          class="correct-img"
-          src="./images/correct.svg"
-          alt="correct" />
-        <img class="wrong-img" src="./images/wrong.svg" alt="wrong"
-      /></span>
-    </div>`;
-  optionsDOM.append(optionElement);
-});
-
 audioControlsBtn.addEventListener("click", () => {
   audioControlsBtn.classList.toggle("muted");
   quizData.muted = !quizData.muted;
@@ -98,38 +123,47 @@ timerDOM.textContent = `${String(Math.floor(timer / 60)).padStart(
 let halfTimerPlayer = false;
 let lowTimerPlayed = false;
 
+generateOptions();
+
 const countDown = setInterval(() => {
-  if (timer == 1) {
-    nextQuestion();
-  }
+  if (!pauseTimer) {
+    if (timer == 1) {
+      nextQuestion();
+    }
 
-  if (
-    !halfTimerPlayer &&
-    timer < Math.floor(question.durationToAnswer / 2) + 1
-  ) {
-    playSound(tickingAudio);
-    document.documentElement.style.setProperty("--accent-color", "197, 190, 0");
-    halfTimerPlayer = true;
-  }
-  if (!lowTimerPlayed && timer < 11) {
-    playSound(tickingAudio);
-    document.documentElement.style.setProperty("--accent-color", "197, 12, 0");
-    lowTimerPlayed = true;
-  }
+    if (
+      !halfTimerPlayer &&
+      timer < Math.floor(question.durationToAnswer / 2) + 1
+    ) {
+      playSound(tickingAudio);
+      document.documentElement.style.setProperty(
+        "--accent-color",
+        "197, 190, 0"
+      );
+      halfTimerPlayer = true;
+    }
+    if (!lowTimerPlayed && timer < 11) {
+      playSound(tickingAudio);
+      document.documentElement.style.setProperty(
+        "--accent-color",
+        "197, 12, 0"
+      );
+      lowTimerPlayed = true;
+    }
 
-  timer--;
-  let mins = String(Math.floor(timer / 60)).padStart(2, "0");
-  let secs = String(timer % 60).padStart(2, "0");
+    timer--;
+    let mins = String(Math.floor(timer / 60)).padStart(2, "0");
+    let secs = String(timer % 60).padStart(2, "0");
 
-  timerDOM.textContent = `${mins}:${secs}`;
+    timerDOM.textContent = `${mins}:${secs}`;
+  }
 }, 1000);
 
-let firstTime = true;
 optionsDOM.addEventListener("click", (e) => {
   const option = e.target.closest(".option");
 
   // If the click wasn't inside an .option or already answered, stop
-  if (!option || !firstTime) return;
+  if (!option) return;
 
   if (option.classList.contains("correct-option")) {
     option.classList.add("correct");
@@ -150,8 +184,7 @@ optionsDOM.addEventListener("click", (e) => {
 
     playSound(wrongAudio);
   }
-  firstTime = false;
-  clearInterval(countDown);
+  pauseTimer = true;
 });
 
 nextDOM.addEventListener("click", nextQuestion);

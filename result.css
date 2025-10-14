@@ -170,6 +170,23 @@ body {
   text-shadow: none;
 }
 
+/* Toast popup */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  transform: translateX(-50%);
+  background: #111;
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 100;
+}
+
 @media (width <= 680px) {
   html {
     font-size: 0.75rem;
