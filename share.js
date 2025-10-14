@@ -1,4 +1,4 @@
-import { score, total, percent } from "./result";
+import { score, total, percent } from "./result.js";
 
 const shareText = `I scored ${score}/${total} (${percent}%) on Quiz Time! 🧠 Try to beat my score!`;
 
